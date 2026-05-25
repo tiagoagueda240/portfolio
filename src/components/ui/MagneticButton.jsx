@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 // Adicionámos ...props para capturar target, rel, e qualquer outra propriedade
 export const MagneticButton = ({ children, className, href, ...props }) => {
@@ -15,13 +15,13 @@ export const MagneticButton = ({ children, className, href, ...props }) => {
   };
 
   return (
-    <motion.a 
-      href={href} 
-      ref={ref} 
-      onMouseMove={handleMouse} 
-      onMouseLeave={() => setPosition({ x: 0, y: 0 })} 
-      animate={{ x: position.x, y: position.y }} 
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }} 
+    <motion.a
+      href={href}
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={() => setPosition({ x: 0, y: 0 })}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className={`inline-block ${className}`}
       // Aplicamos as propriedades extra aqui (incluindo o target="_blank")
       {...props}
