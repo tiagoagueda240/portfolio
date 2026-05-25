@@ -37,11 +37,13 @@ export const ProjectCard3D = ({ project, index, onClick }) => {
       >
         <div className="h-64 w-full bg-slate-800 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10"></div>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000 ease-out opacity-80 group-hover:opacity-100"
-          />
+          {project.image && (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000 ease-out opacity-80 group-hover:opacity-100"
+            />
+          )}
         </div>
         <div className="relative z-20 p-8 -mt-20 flex flex-col h-[calc(100%-11rem)]">
           <div className="flex flex-wrap gap-2 mb-4">

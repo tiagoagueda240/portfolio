@@ -49,9 +49,14 @@ export const PortfolioProvider = ({ children }) => {
     };
 
     sub("experiencias", "experiencias");
-    // Para projetos, normaliza imageUrl → image para compatibilidade dos componentes
+    // Para projetos, normaliza imageUrl → image para compatibilidade dos componentes.
+    // Se imageUrl estiver vazio (ainda sem upload), usa a imagem estática como fallback.
     sub("projetos", "projetos", (docs) =>
-      docs.map((d) => ({ ...d, image: d.imageUrl || "" })),
+      docs.map((d) => ({
+        ...d,
+        image:
+          d.imageUrl || staticProjetos.find((p) => p.id === d.id)?.image || "",
+      })),
     );
     sub("educacao", "educacao");
     sub("skills", "categoriasSkills");
