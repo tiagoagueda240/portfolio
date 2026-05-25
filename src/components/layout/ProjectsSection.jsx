@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import { useState } from "react";
+import { ExternalLink, Github, Images } from "lucide-react";
+import { useEffect, useState } from "react";
 import { projetos } from "../../data/data";
 import { DetailDrawer } from "../ui/DetailDrawer";
 import { ProjectCard3D } from "../ui/ProjectCard3D";
 
 export const ProjectsSection = () => {
   const [selected, setSelected] = useState(null);
+  const [activeImg, setActiveImg] = useState(0);
+
+  useEffect(() => {
+    setActiveImg(0);
+  }, [selected]);
 
   return (
     <section id="projetos" className="py-32">
@@ -36,14 +41,49 @@ export const ProjectsSection = () => {
       <DetailDrawer item={selected} onClose={() => setSelected(null)}>
         {selected && (
           <>
-            <div className="-mx-6 md:-mx-10 -mt-2 mb-8 relative h-52 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080810] to-transparent z-10" />
-              <img
-                src={selected.image}
-                alt={selected.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {/* Galeria */}
+            {selected.detalhes.galeria?.length > 0 && (
+              <div className="-mx-6 md:-mx-10 -mt-2 mb-6">
+                <div className="relative h-52 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080810] to-transparent z-10" />
+                  <img
+                    key={activeImg}
+                    src={selected.detalhes.galeria[activeImg]}
+                    alt={`${selected.title} - imagem ${activeImg + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  {selected.detalhes.galeria.length > 1 && (
+                    <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <Images size={12} className="text-slate-400" />
+                      <span className="text-xs text-slate-400 font-mono">
+                        {activeImg + 1}/{selected.detalhes.galeria.length}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {selected.detalhes.galeria.length > 1 && (
+                  <div className="flex gap-2 px-6 md:px-10 mt-2 overflow-x-auto pb-1">
+                    {selected.detalhes.galeria.map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImg(i)}
+                        className={`flex-shrink-0 h-14 w-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          i === activeImg
+                            ? "border-blue-500 opacity-100"
+                            : "border-slate-700/50 opacity-50 hover:opacity-80"
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-2 mb-3">
               {selected.tags.map((tag) => (
@@ -113,27 +153,27 @@ export const ProjectsSection = () => {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-10 pt-8 border-t border-slate-800">
-              {selected.github && (
+            <div className="flex gap-4 mt-10 pt-8 border-t border-slate-800 flex-wrap">
+              {selected.links?.map((link) => (
                 <a
-                  href={selected.github}
+                  key={link.url}
+                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold rounded-xl transition-colors border border-slate-700/50"
+                  className={`flex items-center gap-2 px-5 py-2.5 text-white text-sm font-bold rounded-xl transition-colors ${
+                    link.tipo === "github"
+                      ? "bg-slate-800 hover:bg-slate-700 border border-slate-700/50"
+                      : "bg-blue-600 hover:bg-blue-500"
+                  }`}
                 >
-                  <Github size={16} /> Código
+                  {link.tipo === "github" ? (
+                    <Github size={16} />
+                  ) : (
+                    <ExternalLink size={16} />
+                  )}
+                  {link.label}
                 </a>
-              )}
-              {selected.demo && (
-                <a
-                  href={selected.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-colors"
-                >
-                  <ExternalLink size={16} /> Demo
-                </a>
-              )}
+              ))}
             </div>
           </>
         )}

@@ -61,32 +61,24 @@ export const ProjectCard3D = ({ project, index, onClick }) => {
             {project.desc}
           </p>
 
-          <div className="flex gap-6 mt-auto">
-            {/* RENDERIZAÇÃO CONDICIONAL: Só aparece se project.github existir e não for vazio */}
-            {project.github && (
+          <div className="flex gap-6 mt-auto flex-wrap">
+            {project.links?.map((link) => (
               <a
-                href={project.github}
+                key={link.url}
+                href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="text-slate-300 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1"
               >
-                <Github size={18} /> Código
+                {link.tipo === "github" ? (
+                  <Github size={18} />
+                ) : (
+                  <ExternalLink size={18} />
+                )}
+                {link.label}
               </a>
-            )}
-
-            {/* RENDERIZAÇÃO CONDICIONAL: Só aparece se project.demo existir e não for vazio */}
-            {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="text-slate-300 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1"
-              >
-                <ExternalLink size={18} /> Demo
-              </a>
-            )}
+            ))}
           </div>
         </div>
       </motion.div>

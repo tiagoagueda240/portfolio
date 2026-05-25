@@ -191,8 +191,15 @@ export const projetos = [
     desc: "Tese de mestrado (19 valores): Modernização do acompanhamento clínico hospitalar através de uma plataforma web que unifica a recolha de dados relatados pelos pacientes (ePROs). A solução automatiza o envio de alertas para equipas médicas sempre que parâmetros críticos são detectados, otimizando recursos e reduzindo a pressão sobre os profissionais de saúde.",
     tags: ["Angular", "Express", "MongoDB"],
     image: santaMartaFoto,
-    github: "https://github.com/tiagoagueda240/Tese-Iscte", // Só GitHub
+    links: [
+      {
+        label: "Código",
+        url: "https://github.com/tiagoagueda240/Tese-Iscte",
+        tipo: "github",
+      },
+    ],
     detalhes: {
+      galeria: [santaMartaFoto],
       desafio:
         "O Hospital de Santa Marta dependia de processos manuais e fragmentados para acompanhar o estado clínico dos pacientes após cirurgia cardíaca, resultando em atrasos na deteção de complicações pós-operatórias.",
       solucao:
@@ -213,8 +220,15 @@ export const projetos = [
     desc: "Solução integrada para a modernização administrativa da Quinta da Escola. A plataforma centraliza horários, atividades e notificações, oferecendo uma gestão simplificada e segura através de uma arquitetura moderna.",
     tags: ["Angular", "PHP", "SQL"],
     image: qeFoto,
-    demo: "https://turnos.quintadaescola.com/", // Só Demo
+    links: [
+      {
+        label: "Website",
+        url: "https://turnos.quintadaescola.com/",
+        tipo: "demo",
+      },
+    ],
     detalhes: {
+      galeria: [qeFoto],
       desafio:
         "A Quinta da Escola geria turnos e horários de colaboradores através de folhas de cálculo e comunicação por WhatsApp, um processo propenso a erros, conflitos de horários e difícil de escalar.",
       solucao:
@@ -234,9 +248,20 @@ export const projetos = [
     desc: "Solução full-stack para a modernização digital da Universidade Lusófona. O projeto unifica a gestão de horários, notificações e requisições de salas num único portal intuitivo. Utilizei Angular e NestJS para criar uma experiência fluida e segura, suportada por uma infraestrutura sólida em Docker e SQL.",
     tags: ["Angular", "NestJS", "SQL", "Docker"],
     image: tfcFoto,
-    github: "https://github.com/tiagoagueda240/control-panel-front-end",
-    demo: "https://www.youtube.com/watch?v=WpTkZ8L7OcY",
+    links: [
+      {
+        label: "Código",
+        url: "https://github.com/tiagoagueda240/control-panel-front-end",
+        tipo: "github",
+      },
+      {
+        label: "Vídeo Demo",
+        url: "https://www.youtube.com/watch?v=WpTkZ8L7OcY",
+        tipo: "demo",
+      },
+    ],
     detalhes: {
+      galeria: [tfcFoto],
       desafio:
         "A Universidade Lusófona carecia de uma plataforma unificada para a gestão de salas, horários de aulas e processos de requisição, recorrendo a sistemas dispersos e ineficientes.",
       solucao:
@@ -256,8 +281,15 @@ export const projetos = [
     desc: "Gestão e inscrição da viagem a Punta Umbría da Associação de Estudantes do ISCTE. O sistema foi desenhado para substituir processos manuais por um fluxo digital automatizado, capaz de lidar com centenas de inscrições em simultâneo e gerir toda a logística do evento.",
     tags: ["Angular", "Firebase"],
     image: villageFoto,
-    demo: "https://isctevillage.web.app/",
+    links: [
+      {
+        label: "Aplicação",
+        url: "https://isctevillage.web.app/",
+        tipo: "demo",
+      },
+    ],
     detalhes: {
+      galeria: [villageFoto],
       desafio:
         "Gerir as inscrições e toda a logística de uma viagem de estudo para mais de 300 estudantes através de formulários Google e emails era ineficiente, propenso a erros e impossível de escalar.",
       solucao:
