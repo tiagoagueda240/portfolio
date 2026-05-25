@@ -7,6 +7,10 @@ export const AdminRoute = () => {
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
+    if (!auth) {
+      setStatus("unauth");
+      return;
+    }
     return onAuthStateChanged(auth, (user) =>
       setStatus(user ? "auth" : "unauth"),
     );

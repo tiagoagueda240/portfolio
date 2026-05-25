@@ -12,6 +12,12 @@ export const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!auth) {
+      setError(
+        "Firebase não está configurado. Cria o ficheiro .env com as credenciais.",
+      );
+      return;
+    }
     setLoading(true);
     setError("");
     try {
