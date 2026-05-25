@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Images } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePortfolio } from "../../context/PortfolioContext";
 import { DetailDrawer } from "../ui/DetailDrawer";
 import { ProjectCard3D } from "../ui/ProjectCard3D";
 
 export const ProjectsSection = () => {
   const { projetos } = usePortfolio();
+  const [selected, setSelected] = useState(null);
+  const [activeImg, setActiveImg] = useState(0);
 
   useEffect(() => {
     setActiveImg(0);
