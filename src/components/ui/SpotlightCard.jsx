@@ -1,4 +1,5 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { getIcon } from "../../lib/icons";
 
 export const SpotlightCard = ({ exp, index, onClick }) => {
   const mouseX = useMotionValue(0);
@@ -26,7 +27,7 @@ export const SpotlightCard = ({ exp, index, onClick }) => {
       />
       <div className="relative z-10 flex flex-col h-full">
         <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800/80 border border-slate-700/50 group-hover:scale-110 transition-transform">
-          {exp.icon}
+          {getIcon(exp.iconName, exp.iconColor)}
         </div>
         <h4 className="text-xl md:text-2xl font-bold text-white mb-1 tracking-tight">
           {exp.cargo}

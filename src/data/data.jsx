@@ -1,13 +1,4 @@
 // src/data.jsx
-import {
-  Code2,
-  Globe,
-  Layout,
-  PenTool,
-  Server,
-  Smartphone,
-  Terminal,
-} from "lucide-react";
 import villageFoto from "../assets/iscte-village.png";
 import qeFoto from "../assets/quinta-da-escola.png";
 import santaMartaFoto from "../assets/santa-marta.png";
@@ -20,12 +11,8 @@ export const experiencias = [
     cargo: "Software Engineer",
     data: "Set 2025 - Presente",
     desc: "Desenvolvimento de plataforma unificada de atendimento em Angular. Implementação de automatismos para geração de Leads comerciais e migração de código legado com foco em performance.",
-    icon: (
-      <Globe
-        className="text-blue-400 group-hover:text-blue-300 transition-colors"
-        size={24}
-      />
-    ),
+    iconName: "Globe",
+    iconColor: "text-blue-400 group-hover:text-blue-300 transition-colors",
     detalhes: {
       responsabilidades: [
         "Desenvolvimento de plataforma unificada de atendimento ao cliente em Angular e TypeScript",
@@ -55,12 +42,8 @@ export const experiencias = [
     cargo: "Coordenador de IT",
     data: "Nov 2023 - Jun 2025",
     desc: "Liderança da equipa de desenvolvimento e definição de roadmap. Desenvolvimento Full-stack dos portais da associação, digitalizando processos internos vitais.",
-    icon: (
-      <Terminal
-        className="text-yellow-400 group-hover:text-yellow-300 transition-colors"
-        size={24}
-      />
-    ),
+    iconName: "Terminal",
+    iconColor: "text-yellow-400 group-hover:text-yellow-300 transition-colors",
     detalhes: {
       responsabilidades: [
         "Liderança técnica de uma equipa de 4 developers e definição do roadmap técnico",
@@ -89,12 +72,9 @@ export const experiencias = [
     cargo: "Software Engineer",
     data: "Jul 2022 - Jul 2023",
     desc: "Desenvolvimento de módulo de digitalização documental para instituição bancária internacional usando Swift e Kotlin, garantindo alta performance no processamento de imagem.",
-    icon: (
-      <Smartphone
-        className="text-emerald-400 group-hover:text-emerald-300 transition-colors"
-        size={24}
-      />
-    ),
+    iconName: "Smartphone",
+    iconColor:
+      "text-emerald-400 group-hover:text-emerald-300 transition-colors",
     detalhes: {
       responsabilidades: [
         "Desenvolvimento de módulo de digitalização documental em Swift (iOS) e Kotlin (Android)",
@@ -123,12 +103,8 @@ export const experiencias = [
     cargo: "Software Engineer",
     data: "Abr 2020 - Jul 2022",
     desc: "Arquitetura e desenvolvimento Full-stack de plataformas E-Commerce. Responsável pelo ciclo completo (End-to-End), integrando pagamentos e gerindo dados transacionais.",
-    icon: (
-      <Code2
-        className="text-purple-400 group-hover:text-purple-300 transition-colors"
-        size={24}
-      />
-    ),
+    iconName: "Code2",
+    iconColor: "text-purple-400 group-hover:text-purple-300 transition-colors",
     detalhes: {
       responsabilidades: [
         "Arquitetura e desenvolvimento End-to-End de plataformas E-Commerce para múltiplos clientes",
@@ -157,28 +133,32 @@ export const categoriasSkills = [
   {
     id: "mobile",
     titulo: "Mobile Nativo",
-    icon: <Smartphone size={20} className="text-emerald-400" />,
+    iconName: "Smartphone",
+    iconColor: "text-emerald-400",
     glowColor: "rgba(52, 211, 153, 0.15)",
     skills: ["Kotlin", "Swift", "Java"],
   },
   {
     id: "frontend",
     titulo: "Frontend",
-    icon: <Layout size={20} className="text-blue-400" />,
+    iconName: "Layout",
+    iconColor: "text-blue-400",
     glowColor: "rgba(96, 165, 250, 0.15)",
     skills: ["Angular", "React", "TypeScript", "HTML/SCSS"],
   },
   {
     id: "backend",
     titulo: "Backend",
-    icon: <Server size={20} className="text-purple-400" />,
+    iconName: "Server",
+    iconColor: "text-purple-400",
     glowColor: "rgba(167, 139, 250, 0.15)",
     skills: ["Node.js", "Express", "NestJS", "Firebase", "SQL", "MongoDB"],
   },
   {
     id: "devops",
     titulo: "DevOps & Tools",
-    icon: <PenTool size={20} className="text-yellow-400" />,
+    iconName: "PenTool",
+    iconColor: "text-yellow-400",
     glowColor: "rgba(250, 204, 21, 0.15)",
     skills: ["Docker", "Git", "Agile (Scrum)", "CI/CD"],
   },

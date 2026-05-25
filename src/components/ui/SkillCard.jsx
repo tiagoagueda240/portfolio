@@ -1,4 +1,5 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { getIcon } from "../../lib/icons";
 
 export const SkillCard = ({ cat, index }) => {
   const mouseX = useMotionValue(0);
@@ -26,7 +27,7 @@ export const SkillCard = ({ cat, index }) => {
         }}
       />
       <div className="mb-4 p-2.5 bg-slate-900/80 rounded-xl w-fit border border-slate-800/50 shadow-sm group-hover:-translate-y-1 transition-transform duration-500">
-        {cat.icon}
+        {getIcon(cat.iconName, cat.iconColor, 20)}
       </div>
       <h4 className="text-base sm:text-lg font-bold text-white mb-3 tracking-tight relative z-10">
         {cat.titulo}

@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { educacao } from "../../data/data";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { DetailDrawer } from "../ui/DetailDrawer";
 
 export const EducationSection = () => {
+  const { educacao } = usePortfolio();
   const [selected, setSelected] = useState(null);
 
   return (

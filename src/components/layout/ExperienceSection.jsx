@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { experiencias } from "../../data/data";
+import { usePortfolio } from "../../context/PortfolioContext";
+import { getIcon } from "../../lib/icons";
 import { DetailDrawer } from "../ui/DetailDrawer";
 import { SpotlightCard } from "../ui/SpotlightCard";
 
 export const ExperienceSection = () => {
+  const { experiencias } = usePortfolio();
   const [selected, setSelected] = useState(null);
 
   return (
@@ -37,7 +39,7 @@ export const ExperienceSection = () => {
           <>
             <div className="flex items-start gap-4 mb-8">
               <div className="mt-1 h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-slate-800 border border-slate-700/50">
-                {selected.icon}
+                {getIcon(selected.iconName, selected.iconColor)}
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-white leading-tight">
