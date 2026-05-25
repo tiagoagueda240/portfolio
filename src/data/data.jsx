@@ -199,7 +199,7 @@ export const projetos = [
       },
     ],
     detalhes: {
-      galeria: [santaMartaFoto],
+      galeria: [santaMartaFoto, santaMartaFoto, santaMartaFoto, santaMartaFoto],
       desafio:
         "O Hospital de Santa Marta dependia de processos manuais e fragmentados para acompanhar o estado clínico dos pacientes após cirurgia cardíaca, resultando em atrasos na deteção de complicações pós-operatórias.",
       solucao:
