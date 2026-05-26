@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { MagneticButton } from "../ui/MagneticButton";
 
 export const Footer = () => {
+  const { perfil } = usePortfolio();
   return (
     <footer
       id="contacto"
@@ -34,7 +36,7 @@ export const Footer = () => {
           caixa de entrada está aberta.
         </p>
         <MagneticButton
-          href="mailto:geral@tiagoagueda.pt"
+          href={`mailto:${perfil.email}`}
           className="inline-flex items-center gap-3 bg-white text-slate-950 font-black tracking-widest uppercase text-sm px-12 py-6 rounded-full transition-colors mb-32 hover:bg-slate-200"
         >
           Entrar em contacto <Send size={18} />
@@ -45,7 +47,7 @@ export const Footer = () => {
           </p>
           <div className="flex gap-6">
             <a
-              href="https://www.linkedin.com/in/tiago-agueda/"
+              href={perfil.linkedin}
               target="_blank"
               rel="noreferrer"
               className="text-slate-500 hover:text-white transition-colors"
@@ -53,7 +55,7 @@ export const Footer = () => {
               <Linkedin size={24} />
             </a>
             <a
-              href="https://github.com/tiagoagueda240"
+              href={perfil.github}
               target="_blank"
               className="text-slate-500 hover:text-white transition-colors"
             >

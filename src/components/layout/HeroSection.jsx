@@ -1,14 +1,19 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import meuCV from "../../assets/Curriculo_Tiago_Agueda.pdf";
-import minhaFoto from "../../assets/foto-tiago-agueda.jpg";
+import meuCVFallback from "../../assets/Curriculo_Tiago_Agueda.pdf";
+import minhaFotoFallback from "../../assets/foto-tiago-agueda.jpg";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { MagneticButton } from "../ui/MagneticButton";
 
 export const HeroSection = () => {
+  const { perfil } = usePortfolio();
   const { scrollY } = useScroll();
   const heroTextY = useTransform(scrollY, [0, 500], [0, 80]);
   const heroPhotoY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  const foto = perfil.fotoUrl || minhaFotoFallback;
+  const cv = perfil.cvUrl || meuCVFallback;
 
   return (
     <motion.section
@@ -42,7 +47,7 @@ export const HeroSection = () => {
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
               <span className="text-emerald-400 font-mono text-xs sm:text-sm uppercase tracking-widest border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 rounded-full">
-                Disponível para desafios
+                {perfil.statusLabel}
               </span>
             </motion.div>
 
@@ -53,7 +58,8 @@ export const HeroSection = () => {
               }}
               className="text-5xl sm:text-6xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter mb-4 text-white drop-shadow-2xl leading-none"
             >
-              Tiago Águeda<span className="text-blue-500">.</span>
+              {perfil.nome}
+              <span className="text-blue-500">.</span>
             </motion.h1>
 
             <motion.h2
@@ -63,9 +69,9 @@ export const HeroSection = () => {
               }}
               className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-slate-400 mb-8 max-w-2xl tracking-tight leading-tight"
             >
-              Construo software{" "}
+              {perfil.tagline}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-                seguro, escalável e imersivo.
+                {perfil.taglineDestaque}
               </span>
             </motion.h2>
 
@@ -90,7 +96,7 @@ export const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </MagneticButton>
               <MagneticButton
-                href={meuCV}
+                href={cv}
                 target="_blank"
                 className="px-8 py-4 bg-slate-900 border border-slate-700 text-white font-bold uppercase tracking-widest text-sm rounded-full hover:bg-slate-800 transition-colors w-full sm:w-auto text-center"
               >
@@ -122,9 +128,9 @@ export const HeroSection = () => {
             <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-slate-700/50 bg-slate-900 shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent z-10 opacity-60"></div>
               <img
-                src={minhaFoto}
-                alt="Tiago Águeda"
-                className="w-full h-full object-cover  hover:grayscale-0 transition-all duration-700 ease-in-out"
+                src={foto}
+                alt={perfil.nome}
+                className="w-full h-full object-cover hover:grayscale-0 transition-all duration-700 ease-in-out"
               />
             </div>
           </motion.div>

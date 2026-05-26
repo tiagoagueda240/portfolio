@@ -5,6 +5,8 @@ import {
   GraduationCap,
   LayoutDashboard,
   LogOut,
+  Settings2,
+  User,
   Wrench,
 } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
@@ -12,10 +14,12 @@ import { auth } from "../../lib/firebase";
 
 const NAV = [
   { to: "/admin", end: true, icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/admin/perfil", icon: User, label: "Perfil" },
   { to: "/admin/projetos", icon: FolderOpen, label: "Projetos" },
   { to: "/admin/experiencia", icon: Briefcase, label: "Experiência" },
   { to: "/admin/educacao", icon: GraduationCap, label: "Educação" },
   { to: "/admin/skills", icon: Wrench, label: "Skills" },
+  { to: "/admin/config", icon: Settings2, label: "Configuração" },
 ];
 
 export const AdminLayout = () => {

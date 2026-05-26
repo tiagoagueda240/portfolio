@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export const DetailDrawer = ({ item, onClose, children }) => {
   useEffect(() => {
@@ -16,10 +17,10 @@ export const DetailDrawer = ({ item, onClose, children }) => {
     };
   }, [item, onClose]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {item && (
-        <div className="fixed inset-0 z-[200]">
+        <div className="fixed inset-0 z-[9999]">
           <motion.div
             className="absolute inset-0 bg-black/70 backdrop-blur-md"
             initial={{ opacity: 0 }}
@@ -48,6 +49,7 @@ export const DetailDrawer = ({ item, onClose, children }) => {
           </motion.aside>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };

@@ -355,3 +355,38 @@ export const educacao = [
     },
   },
 ];
+
+// ─── Perfil pessoal ──────────────────────────────────────────────────────────
+export const perfil = {
+  nome: "Tiago Águeda",
+  tagline: "Construo software",
+  taglineDestaque: "seguro, escalável e imersivo.",
+  statusLabel: "Disponível para desafios",
+  statusAtivo: true,
+  fotoUrl: "", // Cloudinary URL — fallback para asset local
+  cvUrl: "", // Cloudinary URL para PDF do CV
+  email: "geral@tiagoagueda.pt",
+  linkedin: "https://www.linkedin.com/in/tiago-agueda/",
+  github: "https://github.com/tiagoagueda240",
+  sobre: [
+    "Sou um Engenheiro de Software focado em converter problemas complexos em produtos digitais de alta performance. Especializei-me no desenvolvimento Full-Stack de sistemas resilientes.",
+    "A minha experiência na NTT DATA e Xpand IT foca-se no desenho de arquiteturas de missão crítica para o setor bancário, onde a precisão técnica e a segurança de dados são requisitos fundamentais.",
+    "Transponho este rigor corporativo para projetos de impacto real, desde a digitalização de ecossistemas clínicos no Hospital de Santa Marta até à automação logística de eventos académicos de larga escala.",
+  ],
+  codeEspecialidade: "Full-Stack",
+  codeSetores: ["Banca", "Saúde", "Logística"],
+  codeTecnologias: ["Angular", "Node.js", "TypeScript"],
+  codeMindset: "Zero Error Policy",
+};
+
+// ─── Configuração do site (secções visíveis) ──────────────────────────────────
+export const siteConfig = {
+  sections: {
+    hero: { visible: true, label: "Hero" },
+    sobre: { visible: true, label: "Sobre Mim" },
+    experiencia: { visible: true, label: "Experiência" },
+    skills: { visible: true, label: "Skills" },
+    projetos: { visible: true, label: "Projetos" },
+    educacao: { visible: true, label: "Educação" },
+  },
+};

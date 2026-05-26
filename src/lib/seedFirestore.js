@@ -3,7 +3,9 @@ import {
   categoriasSkills,
   educacao,
   experiencias,
+  perfil,
   projetos,
+  siteConfig,
 } from "../data/data";
 import { db } from "./firebase";
 
@@ -41,4 +43,10 @@ export const seedFirestore = async () => {
   for (const [i, item] of categoriasSkills.entries()) {
     await setDoc(doc(db, "skills", item.id), { ...item, order: i });
   }
+
+  // Perfil (singleton)
+  await setDoc(doc(db, "perfil", "main"), perfil);
+
+  // Configuração do site (singleton)
+  await setDoc(doc(db, "siteConfig", "main"), siteConfig);
 };

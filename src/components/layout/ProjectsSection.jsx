@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Github, Images } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ExternalLink, Github, Images, Maximize2, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePortfolio } from "../../context/PortfolioContext";
 import { DetailDrawer } from "../ui/DetailDrawer";
 import { ProjectCard3D } from "../ui/ProjectCard3D";
@@ -9,10 +10,24 @@ export const ProjectsSection = () => {
   const { projetos } = usePortfolio();
   const [selected, setSelected] = useState(null);
   const [activeImg, setActiveImg] = useState(0);
+  const [lightboxImg, setLightboxImg] = useState(null);
 
   useEffect(() => {
     setActiveImg(0);
   }, [selected]);
+
+  // ESC fecha o lightbox sem fechar o drawer
+  useEffect(() => {
+    if (!lightboxImg) return;
+    const handleKey = (e) => {
+      if (e.key === "Escape") {
+        e.stopImmediatePropagation();
+        setLightboxImg(null);
+      }
+    };
+    document.addEventListener("keydown", handleKey, true);
+    return () => document.removeEventListener("keydown", handleKey, true);
+  }, [lightboxImg]);
 
   return (
     <section id="projetos" className="py-32">
@@ -42,18 +57,37 @@ export const ProjectsSection = () => {
       <DetailDrawer item={selected} onClose={() => setSelected(null)}>
         {selected && (
           <>
-            {/* Galeria */}
-            {selected.detalhes.galeria?.length > 0 && (
+            {/* Galeria / Imagem de capa com fallback e fullscreen */}
+            {(selected.detalhes?.galeria?.length > 0 || selected.image) && (
               <div className="-mx-6 md:-mx-10 -mt-2 mb-6">
-                <div className="relative h-52 overflow-hidden">
+                <div
+                  className="relative h-52 overflow-hidden cursor-zoom-in group/img"
+                  onClick={() => {
+                    const src =
+                      selected.detalhes?.galeria?.length > 0
+                        ? selected.detalhes.galeria[activeImg]
+                        : selected.image;
+                    if (src) setLightboxImg(src);
+                  }}
+                >
                   <div className="absolute inset-0 bg-gradient-to-t from-[#080810] to-transparent z-10" />
                   <img
                     key={activeImg}
-                    src={selected.detalhes.galeria[activeImg]}
-                    alt={`${selected.title} - imagem ${activeImg + 1}`}
-                    className="w-full h-full object-cover"
+                    src={
+                      selected.detalhes?.galeria?.length > 0
+                        ? selected.detalhes.galeria[activeImg]
+                        : selected.image
+                    }
+                    alt={selected.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
                   />
-                  {selected.detalhes.galeria.length > 1 && (
+                  <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full opacity-0 group-hover/img:opacity-100 transition-opacity">
+                    <Maximize2 size={12} className="text-white" />
+                    <span className="text-xs text-white font-mono">
+                      Ampliar
+                    </span>
+                  </div>
+                  {selected.detalhes?.galeria?.length > 1 && (
                     <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full">
                       <Images size={12} className="text-slate-400" />
                       <span className="text-xs text-slate-400 font-mono">
@@ -62,7 +96,7 @@ export const ProjectsSection = () => {
                     </div>
                   )}
                 </div>
-                {selected.detalhes.galeria.length > 1 && (
+                {selected.detalhes?.galeria?.length > 1 && (
                   <div className="flex gap-2 px-6 md:px-10 mt-2 overflow-x-auto pb-1">
                     {selected.detalhes.galeria.map((img, i) => (
                       <button
@@ -179,6 +213,39 @@ export const ProjectsSection = () => {
           </>
         )}
       </DetailDrawer>
+
+      {/* Lightbox fullscreen */}
+      {createPortal(
+        <AnimatePresence>
+          {lightboxImg && (
+            <motion.div
+              className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 cursor-zoom-out"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setLightboxImg(null)}
+            >
+              <motion.img
+                src={lightboxImg}
+                alt=""
+                className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl"
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                onClick={() => setLightboxImg(null)}
+                className="absolute top-5 right-5 h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </section>
   );
 };

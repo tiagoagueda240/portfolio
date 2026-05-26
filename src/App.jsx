@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePortfolio } from "./context/PortfolioContext";
 
 // Layout & UI
 import { Footer } from "./components/layout/Footer";
@@ -14,6 +15,9 @@ import { ProjectsSection } from "./components/layout/ProjectsSection";
 import { SkillsSection } from "./components/layout/SkillsSection";
 
 export default function App() {
+  const { siteConfig } = usePortfolio();
+  const sec = siteConfig?.sections ?? {};
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const [hasMouse, setHasMouse] = useState(false);
@@ -73,12 +77,12 @@ export default function App() {
 
       {/* MAIN CONTAINER: Agora sem a restrição do CSS antigo, usamos as bordas do ecrã! */}
       <main className="relative z-10 max-w-7xl mx-auto pt-24 pb-32 px-4 sm:px-8 md:px-12 space-y-24 md:space-y-40">
-        <HeroSection />
-        <AboutSection />
-        <ExperienceSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <EducationSection />
+        {sec.hero?.visible !== false && <HeroSection />}
+        {sec.sobre?.visible !== false && <AboutSection />}
+        {sec.experiencia?.visible !== false && <ExperienceSection />}
+        {sec.skills?.visible !== false && <SkillsSection />}
+        {sec.projetos?.visible !== false && <ProjectsSection />}
+        {sec.educacao?.visible !== false && <EducationSection />}
       </main>
 
       <Footer />

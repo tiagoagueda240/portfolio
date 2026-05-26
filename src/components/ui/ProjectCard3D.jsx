@@ -59,28 +59,36 @@ export const ProjectCard3D = ({ project, index, onClick }) => {
           <h4 className="text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
             {project.title}
           </h4>
-          <p className="text-slate-400 mb-8 leading-relaxed flex-grow">
+          <p className="text-slate-400 mb-4 leading-relaxed flex-grow">
             {project.desc}
           </p>
 
-          <div className="flex gap-6 mt-auto flex-wrap">
-            {project.links?.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="text-slate-300 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1"
-              >
-                {link.tipo === "github" ? (
-                  <Github size={18} />
-                ) : (
-                  <ExternalLink size={18} />
-                )}
-                {link.label}
-              </a>
-            ))}
+          <div className="mt-auto space-y-3">
+            <div className="flex items-center gap-1 text-xs font-mono text-slate-600 group-hover:text-blue-400 transition-colors">
+              <span>Ver detalhes</span>
+              <span className="group-hover:translate-x-1 transition-transform inline-block">
+                →
+              </span>
+            </div>
+            <div className="flex gap-6 flex-wrap">
+              {project.links?.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-slate-300 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all hover:translate-x-1"
+                >
+                  {link.tipo === "github" ? (
+                    <Github size={18} />
+                  ) : (
+                    <ExternalLink size={18} />
+                  )}
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </motion.div>

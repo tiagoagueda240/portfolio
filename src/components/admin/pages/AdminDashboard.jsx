@@ -4,6 +4,8 @@ import {
   FolderOpen,
   GraduationCap,
   RefreshCw,
+  Settings2,
+  User,
   Wrench,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -39,6 +41,23 @@ const COLLECTIONS = [
     icon: Wrench,
     to: "/admin/skills",
     color: "text-purple-400",
+  },
+];
+
+const SINGLETONS = [
+  {
+    label: "Perfil & Identidade",
+    icon: User,
+    to: "/admin/perfil",
+    color: "text-blue-400",
+    desc: "Hero, foto, textos, CV, contactos",
+  },
+  {
+    label: "Configuração do Site",
+    icon: Settings2,
+    to: "/admin/config",
+    color: "text-purple-400",
+    desc: "Visibilidade e ordem das secções",
   },
 ];
 
@@ -83,7 +102,26 @@ export const AdminDashboard = () => {
         <p className="text-slate-400 text-sm mt-1">Visão geral do portfólio</p>
       </div>
 
-      {/* Contadores */}
+      {/* Atalhos singletons */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {SINGLETONS.map(({ label, icon: Icon, to, color, desc }) => (
+          <button
+            key={to}
+            onClick={() => navigate(to)}
+            className="flex items-center gap-4 p-5 bg-slate-900/60 border border-slate-800 rounded-2xl text-left hover:border-slate-600 transition-colors"
+          >
+            <div className={`p-3 rounded-xl bg-slate-800 ${color}`}>
+              <Icon size={18} />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">{label}</p>
+              <p className="text-xs text-slate-500">{desc}</p>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Contadores de coleções */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {COLLECTIONS.map(({ key, label, icon: Icon, to, color }) => (
           <button

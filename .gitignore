@@ -14,5 +14,6 @@ thumb
 sketch
 
 dist
+.env
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#react

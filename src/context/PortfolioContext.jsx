@@ -1,9 +1,11 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, doc, onSnapshot, query } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   educacao as staticEducacao,
   experiencias as staticExp,
+  perfil as staticPerfil,
   projetos as staticProjetos,
+  siteConfig as staticSiteConfig,
   categoriasSkills as staticSkills,
 } from "../data/data";
 import { db } from "../lib/firebase";
@@ -23,6 +25,8 @@ export const PortfolioProvider = ({ children }) => {
     projetos: staticProjetos,
     educacao: staticEducacao,
     categoriasSkills: staticSkills,
+    perfil: staticPerfil,
+    siteConfig: staticSiteConfig,
   });
 
   useEffect(() => {
@@ -60,6 +64,28 @@ export const PortfolioProvider = ({ children }) => {
     );
     sub("educacao", "educacao");
     sub("skills", "categoriasSkills");
+
+    // Singleton: perfil/main
+    const perfilUnsub = onSnapshot(
+      doc(db, "perfil", "main"),
+      (snap) => {
+        if (snap.exists())
+          setState((prev) => ({ ...prev, perfil: snap.data() }));
+      },
+      () => {},
+    );
+    unsubs.push(perfilUnsub);
+
+    // Singleton: siteConfig/main
+    const configUnsub = onSnapshot(
+      doc(db, "siteConfig", "main"),
+      (snap) => {
+        if (snap.exists())
+          setState((prev) => ({ ...prev, siteConfig: snap.data() }));
+      },
+      () => {},
+    );
+    unsubs.push(configUnsub);
 
     return () => unsubs.forEach((u) => u());
   }, []);
