@@ -58,7 +58,7 @@ export default function App() {
       {/* Efeito Cursor - Apenas Desktop */}
       {hasMouse && (
         <motion.div
-          className="pointer-events-none fixed top-0 left-0 w-8 h-8 border border-blue-500/40 rounded-full z-[100] mix-blend-screen"
+          className="pointer-events-none fixed top-0 left-0 w-8 h-8 border border-blue-500/40 rounded-full z-[999999] mix-blend-screen"
           style={{ x: cursorXSpring, y: cursorYSpring }}
         >
           <div className="w-1 h-1 bg-blue-400 rounded-full m-auto absolute inset-0"></div>
